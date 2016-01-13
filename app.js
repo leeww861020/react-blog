@@ -23,8 +23,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-
 var proxy = new httpProxy.createProxyServer({
   target: {
     host: 'localhost',
@@ -32,12 +30,14 @@ var proxy = new httpProxy.createProxyServer({
   }
 });
 
-
 app.all('/v1/*', function(req, res){
   req.headers["contentType"] = "application/json;charset=utf-8";
   req.headers["accept"] = "application/json;charset=utf-8";
   proxy.web(req, res);
 });
+
+app.use('/*', index);
+
 
 
 // catch 404 and forward to error handler
@@ -60,7 +60,6 @@ app.use(function(req, res, next) {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  console.log(res.status);
   var error = {
     timestamp: new Date().getTime(),
     status: 404,
@@ -68,7 +67,6 @@ app.use(function(err, req, res, next) {
     message: "page Not Found",
     path: req.originalUrl
   };
-  //console.log(res.status);
   res.send(error, error.status());
 });
 

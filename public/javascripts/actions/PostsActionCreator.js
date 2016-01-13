@@ -22,7 +22,23 @@ var PostsActionCreator = {
           error: 'There was a problem getting the Posts'
         });      
       });
-   }
+   },
+  getPost: function (id) {
+     Api
+        .get('post/'+id)
+        .then(function (post) {
+            Dispatcher.handleViewAction({
+                actionType: ActionConstants.RECEIVE_POST,
+                post: post
+            });
+        })
+        .catch(function () {
+            Dispatcher.handleViewAction({
+                actionType: ActionConstants.RECEIVE_ERROR,
+                error: 'There was a problem getting the Posts'
+            });
+        });
+    }
 };
 
 module.exports = PostsActionCreator;

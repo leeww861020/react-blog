@@ -38,13 +38,9 @@ var PostsStore = assign({}, EventEmitter.prototype, {
     return _posts;
   },
   
-  getPost: function (id) {
-	 for(var i = 0; i < _posts.length; i++){
-		 if(_posts[i].id == id){
-			 return _posts[i];
-		 }
-	 }
-	 return {};
+  getPost: function () {
+      console.log(_post)
+	return _post;
   }
 });
 
@@ -54,6 +50,9 @@ PostsStore.dispatchToken = Dispatcher.register(function (payload) {
   switch (action.actionType) {
     case ActionConstants.RECEIVE_POSTS:
       setPosts(action.posts.content);
+      break;
+    case ActionConstants.RECEIVE_POST:
+      setPost(action.post);
       break;
     default:
       return true;

@@ -15,9 +15,9 @@ class Content extends Component{
     }
     
     getStateStore(props){
-    	const { id } = props ? props.params : this.props.params;
+    	this.id  = props ? props.params : this.props.params;
     	return { 
-    		post: PostsStore.getPost(id)
+    		post: {}
     	}
     }
     
@@ -26,7 +26,8 @@ class Content extends Component{
     }
 
     componentDidMount() {
-    	
+		console.log(this.id);
+		PostsActionCreator.getPost(this.id.id);
     }
 
     componentWillUnmount() {
@@ -34,8 +35,9 @@ class Content extends Component{
     }
 
     _onChange() {
-    	var post = this.getStateStore();
-    	this.setState(this.getStateStore());
+		this.setState({
+			post: PostsStore.getPost()
+		});
     }
     
     render() {
