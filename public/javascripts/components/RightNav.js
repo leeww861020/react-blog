@@ -66,9 +66,9 @@ class Category extends Component {
 
     render(){
 
-        var CategoryNode = this.state.categories.map(function (category) {
+        var CategoryNode = this.state.categories.map(function (category, idx) {
             return (
-                <ul className="list-unstyled">
+                <ul className="list-unstyled" key={idx}>
                     <li><a href="#">{category.name}</a></li>
                 </ul>
             )
@@ -86,6 +86,8 @@ class Category extends Component {
         )
     }
 }
+
+
 
 
 module.exports = RightNav;

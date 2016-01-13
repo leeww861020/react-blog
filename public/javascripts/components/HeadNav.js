@@ -2,12 +2,16 @@
  * Created by wonwoo on 15. 12. 27..
  */
 import React, { Component } from 'react';
+import { Button } from "react-bootstrap";
+import Login from "./Login";
+
 
 class HeadNav extends Component{
 
-    popup(){
-        //this.refs.toggleInput.getDOMNode().bootstrapToggle();
+    showModal() {
+        $(this.getDOMNode()).modal();
     }
+
 
     render () {
         return (
@@ -23,11 +27,6 @@ class HeadNav extends Component{
                         <a className="navbar-brand" href="#">Start Bootstrap</a>
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <p class="text-center">
-                            <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                Login
-                            </button>
-                        </p>
                         <ul className="nav navbar-nav">
                             <li>
                                 <a href="#">About</a>
@@ -38,10 +37,14 @@ class HeadNav extends Component{
                             <li>
                                 <a href="#">Contact</a>
                             </li>
+                            <li>
+                                <Login />
+                            </li>
                         </ul>
                     </div>
                 </div>
             </nav>
+
         );
     }
 }

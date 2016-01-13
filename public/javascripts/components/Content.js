@@ -50,14 +50,11 @@ class Content extends Component{
  				<hr>
  				</hr>
  				<p><span className="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
-
  				<hr>
  				</hr>
-
  				<img className="img-responsive" src="http://placehold.it/900x300" alt=""/>
- 				<hr>
- 					<p className="lead">{this.state.post.content}</p>
- 				</hr>
+ 				<hr></hr>
+					<p className="lead">{this.state.post.content}</p>
  			</div>
         );
     }

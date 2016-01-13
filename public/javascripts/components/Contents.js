@@ -44,9 +44,9 @@ class Contents extends Component{
     
     render() {
     	if (this.state.posts) {
-    		var PostNode = this.state.posts.map(function (post) {
+    		var PostNode = this.state.posts.map(function (post, idx) {
                 return (
-                    <div>
+                    <div key={idx}>
                         <h2>
                             {post.title}
                         </h2>
@@ -54,9 +54,8 @@ class Contents extends Component{
                             by <a href="index.php">{post.email}</a>
                         </p>
                         <p><span className="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
-                        <hr>
+                        <hr></hr>
                             <img className="img-responsive" src="http://placehold.it/900x300" alt=""/>
-                        </hr>
                         <p>{post.content}</p>
                         <Link className="btn btn-primary" to={`/content/${post.id}`}>Read More <span className="glyphicon glyphicon-chevron-right"></span></Link>
                         <hr></hr>
