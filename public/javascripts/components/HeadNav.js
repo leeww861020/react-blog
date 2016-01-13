@@ -4,6 +4,11 @@
 import React, { Component } from 'react';
 
 class HeadNav extends Component{
+
+    popup(){
+        //this.refs.toggleInput.getDOMNode().bootstrapToggle();
+    }
+
     render () {
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -18,6 +23,11 @@ class HeadNav extends Component{
                         <a className="navbar-brand" href="#">Start Bootstrap</a>
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <p class="text-center">
+                            <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                Login
+                            </button>
+                        </p>
                         <ul className="nav navbar-nav">
                             <li>
                                 <a href="#">About</a>
