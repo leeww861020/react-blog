@@ -25,7 +25,6 @@ export default class Login extends Component {
             scope : "read write"
 
         }
-        console.log(data);
         LoginActionCreator.Login("wonwooapp","XX0000001",data);
 
     }

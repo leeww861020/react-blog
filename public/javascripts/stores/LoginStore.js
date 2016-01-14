@@ -41,7 +41,6 @@ var LoginStore = assign({}, EventEmitter.prototype, {
 LoginStore.dispatchToken = Dispatcher.register(function (payload) {
     var action = payload.action;
 
-    console.log(action);
     switch (action.actionType) {
         case ActionConstants.RECEIVE_LOGIN:
             setAccess_Token(action.token);
