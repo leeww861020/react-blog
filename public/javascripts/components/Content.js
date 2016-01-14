@@ -6,7 +6,7 @@ import PostsStore from '../stores/PostsStore';
 import PostsActionCreator from '../actions/PostsActionCreator';
 import MarkDown from './MarkDown';
 
-class Content extends Component{
+export default class Content extends Component{
 
     constructor(props) {
         super(props);
@@ -26,7 +26,6 @@ class Content extends Component{
     }
 
     componentDidMount() {
-		console.log(this.id);
 		PostsActionCreator.getPost(this.id.id);
     }
 
@@ -60,4 +59,3 @@ class Content extends Component{
     }
 }
 
-module.exports = Content;

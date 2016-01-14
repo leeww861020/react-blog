@@ -40,7 +40,7 @@ var md = new Remarkable('full', {
 	  }
 });
 
-class MarkDown extends Component{
+export default class MarkDown extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -84,5 +84,3 @@ class MarkDown extends Component{
 		);
 	}
 }
-
-module.exports = MarkDown;

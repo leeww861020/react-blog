@@ -3,8 +3,8 @@
  */
 'use strict';
 
-var Flux = require('flux');
-var assign = require('object-assign');
+import Flux from 'flux';
+import assign from 'object-assign';
 
 /**
  * A singleton that operates as the central hub for application updates.

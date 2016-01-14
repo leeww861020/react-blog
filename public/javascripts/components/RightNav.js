@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import CategoryStore from '../stores/CategoryStore';
 import CategoryActionCreator from '../actions/CategoryActionCreator';
 
-class RightNav extends Component{
+export default class RightNav extends Component{
 
     render () {
         return (
@@ -86,8 +86,3 @@ class Category extends Component {
         )
     }
 }
-
-
-
-
-module.exports = RightNav;

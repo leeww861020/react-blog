@@ -8,7 +8,7 @@ import RightNav from './RightNav';
 import Contents from './Contents';
 
 
-class BlogMain extends Component{
+export default class BlogMain extends Component{
     render () {
         return (
             <div>
@@ -28,4 +28,3 @@ class BlogMain extends Component{
     }
 }
 
-module.exports = BlogMain;

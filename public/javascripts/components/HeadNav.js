@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import Login from "./Login";
 
 
-class HeadNav extends Component{
+export default class HeadNav extends Component{
 
     showModal() {
         $(this.getDOMNode()).modal();

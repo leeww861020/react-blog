@@ -7,7 +7,7 @@ import PostsActionCreator from '../actions/PostsActionCreator';
 import MarkDown from './MarkDown';
 
 
-class NewContent extends Component{
+export default class NewContent extends Component{
 
     constructor(props) {
         super(props);
@@ -47,5 +47,3 @@ class NewContent extends Component{
         );
     }
 }
-
-module.exports = NewContent;

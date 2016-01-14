@@ -14,7 +14,7 @@ import PostsActionCreator from '../actions/PostsActionCreator';
 import Router , { Link } from 'react-router';
 
 
-class Contents extends Component{
+export default class Contents extends Component{
 
     constructor(props) {
         super(props);
@@ -87,4 +87,3 @@ class Contents extends Component{
     }
 }
 
-module.exports = Contents;

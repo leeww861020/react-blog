@@ -1,9 +1,9 @@
 'use strict';
 
-var Dispatcher = require('../core/Dispatcher');
-var ActionConstants = require('../constants/ActionConstants');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
+import Dispatcher from '../core/Dispatcher';
+import ActionConstants from '../constants/ActionConstants';
+import { EventEmitter } from 'events';
+import assign from 'object-assign';
 
 var CHANGE_EVENT = 'change',
     _categories = [];
@@ -52,4 +52,4 @@ CategoryStore.dispatchToken = Dispatcher.register(function (payload) {
   return true;
 });
 
-module.exports = CategoryStore;
+export default CategoryStore;

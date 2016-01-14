@@ -30,11 +30,19 @@ var proxy = new httpProxy.createProxyServer({
   }
 });
 
+app.post('/v1/oauth/token', function(req, res){
+  req.headers["contentType"] = "application/x-www-form-urlencoded";
+  req.headers["accept"] = "application/json;charset=utf-8";
+  proxy.web(req, res);
+});
+
+
 app.all('/v1/*', function(req, res){
   req.headers["contentType"] = "application/json;charset=utf-8";
   req.headers["accept"] = "application/json;charset=utf-8";
   proxy.web(req, res);
 });
+
 
 app.use('/*', index);
 

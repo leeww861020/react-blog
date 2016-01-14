@@ -1,29 +1,31 @@
 /**
- * Created by wonwoo on 16. 1. 11..
+ * Created by crossys on 2016-01-14.
  */
+'use strict';
 
 import Dispatcher from '../core/Dispatcher';
 import ActionConstants from '../constants/ActionConstants';
 import { Promise } from'es6-promise'; // jshint ignore:line
 import Api from '../services/Api';
 
-var CategoryActionCreator = {
-    getCategories : function() {
+var LoginActionCreator = {
+
+    Login: function (username, password, data) {
         Api
-            .get('category/')
-            .then(function (categories) {
+            .oauth('oauth/token',username, password,data)
+            .then(function (token) {
                 Dispatcher.handleViewAction({
-                    actionType: ActionConstants.RECEIVE_CATEGORY,
-                    categories: categories
+                    actionType: ActionConstants.RECEIVE_LOGIN,
+                    token: token
                 });
             })
-            .catch(function () {
+            .catch(function (res) {
                 Dispatcher.handleViewAction({
                     actionType: ActionConstants.RECEIVE_ERROR,
-                    error: 'There was a problem getting the Categoris'
+                    error: res
                 });
             });
-    }
-}
+    },
+};
 
-export default CategoryActionCreator;
+export default LoginActionCreator;

@@ -4,14 +4,30 @@
 
 import React, { Component } from 'react';
 import { Modal, Button ,ButtonToolbar } from "react-bootstrap";
+import LoginStore from '../stores/LoginStore';
+import LoginActionCreator from '../actions/LoginActionCreator';
 
-class Login extends Component {
+export default class Login extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             show : false
         };
+    }
+
+
+    Login(){
+        var data = {
+            username : "aoruqjfu@gmail.com",
+            password : "pwadmin",
+            grant_type : "password",
+            scope : "read write"
+
+        }
+        console.log(data);
+        LoginActionCreator.Login("wonwooapp","XX0000001",data);
+
     }
 
     showModal() {
@@ -40,7 +56,7 @@ class Login extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <h6 className="text-center">COMPLETE THESE FIELDS TO SIGN UP</h6>
-                        <form className="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0">
+                        <div className="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0">
                             <div className="form-group">
                                 <input type="text" className="form-control input-lg" placeholder="Email" />
                             </div>
@@ -48,10 +64,10 @@ class Login extends Component {
                                 <input type="password" className="form-control input-lg" placeholder="Password" />
                             </div>
                             <div className="form-group">
-                                <button className="btn btn-danger btn-lg btn-block">Sign In</button>
+                                <button className="btn btn-danger btn-lg btn-block" onClick={this.Login.bind(this)}>Sign In</button>
                                 <span className="pull-right"><a href="#">Register</a></span><span><a href="#">Need help?</a></span>
                             </div>
-                        </form>
+                        </div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.hideModal.bind(this)}>Close</Button>
@@ -62,4 +78,3 @@ class Login extends Component {
     }
 }
 
-module.exports = Login;

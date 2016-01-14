@@ -1,9 +1,9 @@
 'use strict';
 
-var Dispatcher = require('../core/Dispatcher');
-var ActionConstants = require('../constants/ActionConstants');
-var Promise = require('es6-promise').Promise; // jshint ignore:line
-var Api = require('../services/Api');
+import Dispatcher from '../core/Dispatcher';
+import ActionConstants from '../constants/ActionConstants';
+import { Promise } from'es6-promise'; // jshint ignore:line
+import Api from '../services/Api';
 
 var PostsActionCreator = {
 
@@ -41,4 +41,4 @@ var PostsActionCreator = {
     }
 };
 
-module.exports = PostsActionCreator;
+export default PostsActionCreator;
