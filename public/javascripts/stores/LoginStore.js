@@ -4,54 +4,43 @@
 
 import Dispatcher from '../core/Dispatcher';
 import ActionConstants from '../constants/ActionConstants';
-import { EventEmitter } from 'events';
-import assign from 'object-assign';
 
-var CHANGE_EVENT = 'change',
-    _access_token = [];
+import BaseStore from './BaseStore'
 
-/**
- * Set the values for categories that will be used
- * with components.
- */
+class LoginStore extends BaseStore {
 
-function setAccess_Token(access_token) {
-    _access_token = access_token;
-}
-
-var LoginStore = assign({}, EventEmitter.prototype, {
-
-    emitChange: function () {
-        this.emit(CHANGE_EVENT);
-    },
-
-    addChangeListener: function (callback) {
-        this.on(CHANGE_EVENT, callback);
-    },
-
-    removeChangeListener: function (callback) {
-        this.removeListener(CHANGE_EVENT, callback);
-    },
-
-    getAccess_Token: function () {
-        return _access_token;
-    },
-});
-
-LoginStore.dispatchToken = Dispatcher.register(function (payload) {
-    var action = payload.action;
-
-    switch (action.actionType) {
-        case ActionConstants.RECEIVE_LOGIN:
-            setAccess_Token(action.token);
-            break;
-        default:
-            return true;
+    constructor() {
+        super();
+        this.subscribe(() => this._registerToActions.bind(this));
+        this.access_token;
     }
 
-    LoginStore.emitChange();
+    _registerToActions(payload) {
+        let action = payload.action;
+        switch (action.actionType) {
+            case ActionConstants.RECEIVE_LOGIN:
+                this.access_token = action.token;
+                localStorage.setItem('token', this.access_token);
+                break;
+            default:
+                return true;
+        }
+        this.emitChange();
 
-    return true;
-});
+        return true;
+    }
 
-export default LoginStore;
+    getToken () {
+        return this.access_token;
+    }
+
+    isLogin(){
+        return getLocalToken() != null;
+    }
+}
+
+function getLocalToken(){
+    return localStorage.getItem("token");
+}
+
+export default new LoginStore();

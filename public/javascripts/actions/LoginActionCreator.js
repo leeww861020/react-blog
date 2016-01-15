@@ -25,5 +25,10 @@ export default {
                     error: res
                 });
             });
+        return this;
     },
+    catch(){
+
+    }
+
 };
