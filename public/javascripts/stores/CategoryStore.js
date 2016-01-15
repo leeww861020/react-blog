@@ -2,8 +2,9 @@
 
 import Dispatcher from '../core/Dispatcher';
 import ActionConstants from '../constants/ActionConstants';
-import { EventEmitter } from 'events';
-import assign from 'object-assign';
+
+import BaseStore from './BaseStore';
+
 
 var CHANGE_EVENT = 'change',
     _categories = [];
@@ -17,39 +18,31 @@ function setCategories(categories) {
   _categories = categories;
 }
 
-var CategoryStore = assign({}, EventEmitter.prototype, {
+class CategoryStore extends BaseStore{
 
-  emitChange: function () {
-    this.emit(CHANGE_EVENT);
-  },
-
-  addChangeListener: function (callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  removeChangeListener: function (callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  },
-
-  getCategories: function () {
-    return _categories;
-  },
-});
-
-CategoryStore.dispatchToken = Dispatcher.register(function (payload) {
-  var action = payload.action;
-
-  switch (action.actionType) {
-    case ActionConstants.RECEIVE_CATEGORY:
-      setCategories(action.categories.content);
-      break;
-    default:
-      return true;
+  constructor() {
+    super();
+    this.subscribe(() => this._registerToActions.bind(this))
   }
 
-  CategoryStore.emitChange();
+  _registerToActions(payload) {
+    var action = payload.action;
+    switch (action.action.actionType) {
+      case ActionConstants.RECEIVE_CATEGORY:
+       setCategories(action.action.categories.content);
+          console.log(_categories)
+        this.emitChange();
+        break;
+      default:
+        break;
+    };
 
-  return true;
-});
+  }
 
-export default CategoryStore;
+  get getCategories() {
+    return this._categories;
+  }
+
+}
+
+export default new CategoryStore();

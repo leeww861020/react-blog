@@ -37,7 +37,7 @@ var PostsStore = assign({}, EventEmitter.prototype, {
   getPosts: function () {
     return _posts;
   },
-  
+
   getPost: function () {
       console.log(_post)
 	return _post;
@@ -58,7 +58,7 @@ PostsStore.dispatchToken = Dispatcher.register(function (payload) {
       return true;
   }
 
-  PostsStore.emitChange();
+ PostsStore.emitChange();
 
   return true;
 });

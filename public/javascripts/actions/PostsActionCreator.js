@@ -5,7 +5,7 @@ import ActionConstants from '../constants/ActionConstants';
 import { Promise } from'es6-promise'; // jshint ignore:line
 import Api from '../services/Api';
 
-var PostsActionCreator = {
+export default {
 
   getPosts: function () {
     Api
@@ -40,5 +40,3 @@ var PostsActionCreator = {
         });
     }
 };
-
-export default PostsActionCreator;

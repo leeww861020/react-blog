@@ -26,7 +26,6 @@ export default class Login extends Component {
 
         }
         LoginActionCreator.Login("wonwooapp","XX0000001",data);
-
     }
 
     showModal() {

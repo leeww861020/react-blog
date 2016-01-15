@@ -8,7 +8,7 @@ import ActionConstants from '../constants/ActionConstants';
 import { Promise } from'es6-promise'; // jshint ignore:line
 import Api from '../services/Api';
 
-var LoginActionCreator = {
+export default {
 
     Login: function (username, password, data) {
         Api
@@ -27,5 +27,3 @@ var LoginActionCreator = {
             });
     },
 };
-
-export default LoginActionCreator;

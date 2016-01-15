@@ -65,7 +65,6 @@ class Category extends Component {
 
 
     render(){
-
         var CategoryNode = this.state.categories.map(function (category, idx) {
             return (
                 <ul className="list-unstyled" key={idx}>

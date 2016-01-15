@@ -7,7 +7,7 @@ import ActionConstants from '../constants/ActionConstants';
 import { Promise } from'es6-promise'; // jshint ignore:line
 import Api from '../services/Api';
 
-var CategoryActionCreator = {
+export default {
     getCategories : function() {
         Api
             .get('category/')
@@ -17,13 +17,11 @@ var CategoryActionCreator = {
                     categories: categories
                 });
             })
-            .catch(function () {
+            .catch(function (error) {
                 Dispatcher.handleViewAction({
                     actionType: ActionConstants.RECEIVE_ERROR,
-                    error: 'There was a problem getting the Categoris'
+                    error: error
                 });
             });
     }
 }
-
-export default CategoryActionCreator;
