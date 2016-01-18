@@ -9,14 +9,14 @@ import ReactMarkdown from 'react-markdown';
 import hljs from 'highlight.js';
 import { Tabs,Tab, Button } from 'react-bootstrap';
 
-import PostsStore from '../stores/PostsStore';
-import PostsActionCreator from '../actions/PostsActionCreator';
+import PostsStore from '../../stores/PostsStore';
+import PostsActionCreator from '../../actions/PostsActionCreator';
 
 
 import 'codemirror/lib/codemirror.css';
 import 'highlight.js/styles/github.css';
 import 'codemirror/theme/monokai.css';
-import '../../stylesheets/markdown.css';
+import '../../../stylesheets/markdown.css';
 
 export default class MarkDown extends Component {
 

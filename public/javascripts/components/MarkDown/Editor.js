@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import CodeMirrorEditor from './MarkDown/Codemirror';
+import CodeMirrorEditor from './Codemirror';
 
 module.exports = React.createClass({
     displayName: 'Editor',

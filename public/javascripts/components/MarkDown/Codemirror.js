@@ -3,11 +3,6 @@
 import React, { Component } from 'react';
 import CodeMirror from 'codemirror';
 
-
-// CodeMirror React component
-// based on https://github.com/ForbesLindesay/react-code-mirror/blob/master/index.js
-//
-
 var IS_MOBILE = typeof navigator === 'undefined' || (
         navigator.userAgent.match(/Android/i)
         || navigator.userAgent.match(/webOS/i)
@@ -17,7 +12,6 @@ var IS_MOBILE = typeof navigator === 'undefined' || (
         || navigator.userAgent.match(/BlackBerry/i)
         || navigator.userAgent.match(/Windows Phone/i)
     );
-
 
 export default class CodeMirrorEditor extends Component {
     constructor(props) {

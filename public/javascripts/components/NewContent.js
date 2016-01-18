@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import PostsStore from '../stores/PostsStore';
 import PostsActionCreator from '../actions/PostsActionCreator';
-import MarkDown from './MarkDown';
+import MarkDown from './MarkDown/MarkDown';
 
 
 export default class NewContent extends Component {
