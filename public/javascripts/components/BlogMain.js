@@ -8,8 +8,8 @@ import RightNav from './RightNav';
 import Contents from './Contents';
 
 
-export default class BlogMain extends Component{
-    render () {
+export default class BlogMain extends Component {
+    render() {
         return (
             <div>
                 <HeadNav />
@@ -17,7 +17,7 @@ export default class BlogMain extends Component{
                 <div className="container">
                     <div className="container">
                         <div className="row">
-                        	{this.props.children}
+                            {this.props.children}
                             <RightNav />
                         </div>
                         <Footer />

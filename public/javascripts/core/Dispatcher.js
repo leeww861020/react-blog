@@ -12,15 +12,15 @@ import assign from 'object-assign';
  */
 export default assign(new Flux.Dispatcher(), {
 
-  /**
-   * @param {object} action The details of the action, including the action's
-   * type and additional data coming from the view.
-   */
-  handleViewAction: function (action) {
-    var payload = {
-      action: action
-    };
-    this.dispatch(payload);
-  }
+    /**
+     * @param {object} action The details of the action, including the action's
+     * type and additional data coming from the view.
+     */
+    handleViewAction: function (action) {
+        var payload = {
+            action: action
+        };
+        this.dispatch(payload);
+    }
 
 });

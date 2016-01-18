@@ -12,7 +12,7 @@ export default {
 
     Login: function (username, password, data) {
         Api
-            .oauth('oauth/token',username, password,data)
+            .oauth('oauth/token', username, password, data)
             .then(function (token) {
                 Dispatcher.handleViewAction({
                     actionType: ActionConstants.RECEIVE_LOGIN,
@@ -21,14 +21,16 @@ export default {
             })
             .catch(function (res) {
                 Dispatcher.handleViewAction({
-                    actionType: ActionConstants.RECEIVE_ERROR,
+                    actionType: ActionConstants.RECEIVE_LOGIN_ERROR,
                     error: res
                 });
             });
-        return this;
     },
-    catch(){
 
+    logout: function () {
+        Dispatcher.handleViewAction({
+            actionType: ActionConstants.RECEIVE_LOGOUT
+        });
     }
 
 };

@@ -18,15 +18,15 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var proxy = new httpProxy.createProxyServer({
   target: {
     host: 'localhost',
-    port: 8080
+    port: 8888
   }
 });
 
@@ -39,7 +39,10 @@ app.post('/v1/oauth/token', function(req, res){
 
 app.all('/v1/*', function(req, res){
   req.headers["contentType"] = "application/json;charset=utf-8";
-  req.headers["accept"] = "application/json;charset=utf-8";
+    //req.body = JSON.stringify(req.body)
+    //console.log(req.body);
+    //console.log(typeof(req.body));
+    //console.log(typeof(req.body) == "String");
   proxy.web(req, res);
 });
 

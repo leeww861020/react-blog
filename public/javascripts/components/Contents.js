@@ -14,37 +14,37 @@ import PostsActionCreator from '../actions/PostsActionCreator';
 import Router , { Link } from 'react-router';
 
 
-export default class Contents extends Component{
+export default class Contents extends Component {
 
     constructor(props) {
         super(props);
         this._onChange = this._onChange.bind(this);
         this.state = {
-            posts : []
+            posts: []
         };
     }
-    
+
     componentWillMount() {
-    	PostsStore.addChangeListener(this._onChange);
+        PostsStore.addChangeListener(this._onChange);
     }
 
     componentDidMount() {
-    	PostsActionCreator.getPosts();
+        PostsActionCreator.getPosts();
     }
 
     componentWillUnmount() {
-    	PostsStore.removeChangeListener(this._onChange);
+        PostsStore.removeChangeListener(this._onChange);
     }
 
     _onChange() {
         this.setState({
-          posts: PostsStore.getPosts()
+            posts: PostsStore.getPosts()
         });
     }
-    
+
     render() {
-    	if (this.state.posts) {
-    		var PostNode = this.state.posts.map(function (post, idx) {
+        if (this.state.posts) {
+            var PostNode = this.state.posts.map((post, idx) => {
                 return (
                     <div key={idx}>
                         <h2>
@@ -55,22 +55,22 @@ export default class Contents extends Component{
                         </p>
                         <p><span className="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
                         <hr></hr>
-                            <img className="img-responsive" src="http://placehold.it/900x300" alt=""/>
                         <p>{post.content}</p>
-                        <Link className="btn btn-primary" to={`/content/${post.id}`}>Read More <span className="glyphicon glyphicon-chevron-right"></span></Link>
+                        <Link className="btn btn-primary" to={`/content/${post.id}`}>Read More <span
+                            className="glyphicon glyphicon-chevron-right"></span></Link>
                         <hr></hr>
                     </div>
                 )
             });
-    	}
-    	 return (
+        }
+        return (
             <div className="col-md-8">
                 <h1 className="page-header">
                     Page Heading
                 </h1>
                 <ul className="pager">
                     <li className="next">
-                        <Link className="btn btn-primary" to={`/content/`}>wirte <span className="glyphicon glyphicon-chevron-right"></span></Link>
+                        <Link to={`/content/`}>wirte</Link>
                     </li>
                 </ul>
                 {PostNode}

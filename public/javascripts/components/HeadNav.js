@@ -6,19 +6,15 @@ import { Button } from "react-bootstrap";
 import Login from "./Login";
 
 
-export default class HeadNav extends Component{
+export default class HeadNav extends Component {
 
-    showModal() {
-        $(this.getDOMNode()).modal();
-    }
-
-
-    render () {
+    render() {
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div className="container">
                     <div className="navbar-header">
-                        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <button type="button" className="navbar-toggle" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1">
                             <span className="sr-only">Toggle navigation</span>
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
@@ -34,12 +30,7 @@ export default class HeadNav extends Component{
                             <li>
                                 <a href="#">Services</a>
                             </li>
-                            <li>
-                                <a href="#">Contact</a>
-                            </li>
-                            <li>
-                                <Login />
-                            </li>
+                            <Login />
                         </ul>
                     </div>
                 </div>
@@ -48,5 +39,3 @@ export default class HeadNav extends Component{
         );
     }
 }
-
-module.exports = HeadNav;

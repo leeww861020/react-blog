@@ -4,28 +4,37 @@
 import React, { Component } from 'react';
 import CategoryStore from '../stores/CategoryStore';
 import CategoryActionCreator from '../actions/CategoryActionCreator';
+import PostsStore from '../stores/PostsStore';
+import MessageSection from './MessageSection';
+import PostsActionCreator from '../actions/PostsActionCreator';
 
-export default class RightNav extends Component{
+export default class RightNav extends Component {
 
-    render () {
+    render() {
         return (
             <div className="col-md-4">
                 <Search />
                 <Category />
+                <MessageSection />
             </div>
         );
     }
 }
 
 class Search extends Component {
-    render(){
+
+    SearchPosts() {
+        PostsActionCreator.getSearchTitlePosts(this.refs.title.value);
+    }
+
+    render() {
         return (
             <div className="well">
                 <h4>Blog Search</h4>
                 <div className="input-group">
-                    <input type="text" className="form-control" />
+                    <input type="text" ref="title" className="form-control"/>
                     <span className="input-group-btn">
-                        <button className="btn btn-default" type="button">
+                        <button className="btn btn-default" type="button" onClick={this.SearchPosts.bind(this)}>
                             <span className="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
@@ -41,7 +50,7 @@ class Category extends Component {
         super(props);
         this._onChange = this._onChange.bind(this);
         this.state = {
-            categories : []
+            categories: []
         };
     }
 
@@ -64,8 +73,8 @@ class Category extends Component {
     }
 
 
-    render(){
-        var CategoryNode = this.state.categories.map(function (category, idx) {
+    render() {
+        var CategoryNode = this.state.categories.map((category, idx) => {
             return (
                 <ul className="list-unstyled" key={idx}>
                     <li><a href="#">{category.name}</a></li>

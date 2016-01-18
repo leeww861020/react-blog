@@ -8,7 +8,7 @@ import { Promise } from'es6-promise'; // jshint ignore:line
 import Api from '../services/Api';
 
 export default {
-    getCategories : function() {
+    getCategories: function () {
         Api
             .get('category/')
             .then(function (categories) {

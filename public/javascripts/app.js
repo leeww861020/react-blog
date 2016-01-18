@@ -8,4 +8,4 @@ const appEl = document.getElementById('app');
 // but switch to HTML5 history locally.
 const history = process.env.NODE_ENV === 'production' ? createHashHistory() : createHistory();
 
-ReactDOM.render(<Root history={history} />, appEl);
+ReactDOM.render(<Root history={history}/>, appEl);

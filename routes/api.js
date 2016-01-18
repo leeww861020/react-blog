@@ -4,24 +4,24 @@ var api = express.Router();
 var http = require("http");
 
 var options = {
-  hostname : "localhost",
-  port : "8080",
-  path : ""
+    hostname: "localhost",
+    port: "8080",
+    path: ""
 };
 
-function handleResponse(res){
+function handleResponse(res) {
     var data = "";
-    res.on("data", function(chunk){
-        data+= chunk;
+    res.on("data", function (chunk) {
+        data += chunk;
     });
-    res.on("end", function(){
+    res.on("end", function () {
         console.log(data);
     });
 };
 
-api.get('*', function(req, res){
+api.get('*', function (req, res) {
     options.path = req.originalUrl;
-    http.request(options, function(res){
+    http.request(options, function (res) {
         handleResponse(res);
     }).end();
 });

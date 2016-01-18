@@ -6,55 +6,52 @@ import PostsStore from '../stores/PostsStore';
 import PostsActionCreator from '../actions/PostsActionCreator';
 import MarkDown from './MarkDown';
 
-export default class Content extends Component{
+export default class Content extends Component {
 
     constructor(props) {
         super(props);
         this._onChange = this._onChange.bind(this);
         this.state = this.getStateStore();
     }
-    
-    getStateStore(props){
-    	this.id  = props ? props.params : this.props.params;
-    	return { 
-    		post: {}
-    	}
+
+    getStateStore(props) {
+        this.id = props ? props.params : this.props.params;
+        return {
+            post: {}
+        }
     }
-    
+
     componentWillMount() {
-    	PostsStore.addChangeListener(this._onChange);
+        PostsStore.addChangeListener(this._onChange);
     }
 
     componentDidMount() {
-		PostsActionCreator.getPost(this.id.id);
+        PostsActionCreator.getPost(this.id.id);
     }
 
     componentWillUnmount() {
-    	PostsStore.removeChangeListener(this._onChange);
+        PostsStore.removeChangeListener(this._onChange);
     }
 
     _onChange() {
-		this.setState({
-			post: PostsStore.getPost()
-		});
+        this.setState({
+            post: PostsStore.getPost()
+        });
     }
-    
+
     render() {
-		return (
-    			<div className="col-md-8">
- 					<h1>{this.state.post.title}</h1>
- 				<p className="lead">
- 					by <a href="#">{this.state.post.email}</a>
- 				</p>
- 				<hr>
- 				</hr>
- 				<p><span className="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
- 				<hr>
- 				</hr>
- 				<img className="img-responsive" src="http://placehold.it/900x300" alt=""/>
- 				<hr></hr>
-					<p className="lead">{this.state.post.content}</p>
- 			</div>
+        return (
+            <div className="col-md-8">
+                <h1>{this.state.post.title}</h1>
+                <p className="lead">
+                    by <a href="#">{this.state.post.email}</a>
+                </p>
+                <hr>
+                </hr>
+                <p><span className="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+                <hr></hr>
+                <MarkDown content={this.state.post.content}/>
+            </div>
         );
     }
 }

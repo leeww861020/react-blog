@@ -3,84 +3,124 @@
  */
 
 import React, { Component } from 'react';
-import Remarkable from 'remarkable';
+import MarkdownControls from './Markdown-controls';
+import Editor from './Editor';
+import ReactMarkdown from 'react-markdown';
 import hljs from 'highlight.js';
+import { Tabs,Tab, Button } from 'react-bootstrap';
 
-require('../../stylesheets/default.css');
-require('../../stylesheets/markdown.css');
+import PostsStore from '../stores/PostsStore';
+import PostsActionCreator from '../actions/PostsActionCreator';
 
-var md = new Remarkable('full', {
-	  html:         false,        // Enable HTML tags in source
-	  xhtmlOut:     false,        // Use '/' to close single tags (<br />)
-	  breaks:       false,        // Convert '\n' in paragraphs into <br>
-	  langPrefix:   'language-',  // CSS language prefix for fenced blocks
-	  linkify:      true,         // autoconvert URL-like texts to links
-	
-	  // Enable some language-neutral replacements + quotes beautification
-	  typographer:  false,
-	
-	  // Double + single quotes replacement pairs, when typographer enabled,
-	  // and smartquotes on. Set doubles to '«»' for Russian, '„“' for German.
-	  quotes: '“”‘’',
-	
-	  // Highlighter function. Should return escaped HTML,
-	  // or '' if input not changed
-	  highlight: function (str, lang) {
-	    if (lang && hljs.getLanguage(lang)) {
-	      try {
-	        return hljs.highlight(lang, str).value;
-	      } catch (__) {}
-	    }
-	
-	    try {
-	      return hljs.highlightAuto(str).value;
-	    } catch (__) {}
-	
-	    return ''; // use external default escaping
-	  }
-});
 
-export default class MarkDown extends Component{
+import 'codemirror/lib/codemirror.css';
+import 'highlight.js/styles/github.css';
+import 'codemirror/theme/monokai.css';
+import '../../stylesheets/markdown.css';
+
+export default class MarkDown extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-        	outputValue : ""
+            markdownSrc: [].join(''),
+            htmlMode: 'raw'
         };
     }
-	handleChange(e) {
-		var source = document.getElementsByClassName("source")[0].value;
-	    document.getElementsByClassName("result-html")[0].innerHtml = md.render(source);
-	    try {
-	    	if (source) {
-	    		permalink.href = '#md64=' + window.btoa(encodeURI(JSON.stringify({
-	    			source: source,
-	    			defaults: _.omit(defaults, 'highlight')
-	        })));
-	    	} else {
-	    	  permalink.href = '';
-	    	}	
-	    } catch (__) {
-	      permalink.href = '';
-	    }
-		this.setState({outputValue: md.render(source)});
-	}
-	render() {
-		return (
-			<div className="container full-height">
-		      	<div className="row full-height">
-		      		<div className="col-xs-6 full-height">
-		      			<div className="demo-control"><a href="#" className="source-clear">clear</a><a id="permalink" href="./" title="Share this snippet as link"><strong>permalink</strong></a></div>
-		      				<textarea className="source full-height" ref="textarea" onChange={this.handleChange.bind(this)}>
-		      				</textarea>
-	      			</div>
-	      				<section className="col-xs-6 full-height">
-		      				<div className="demo-control"><a href="#" data-result-as="html">html</a><a href="#" data-result-as="src">source</a><a href="#" data-result-as="debug">debug</a></div>
-		      				<div className="result-html full-height" dangerouslySetInnerHTML={{__html: this.state.outputValue}}></div>
-		      				<pre className="result-src full-height"><code className="result-src-content full-height"></code></pre>
-		      				<pre className="result-debug full-height"><code className="result-debug-content full-height"></code></pre>
-	      				</section>
-		        </div>
-		      </div>
-		);
-	}
+
+
+    onMarkdownChange(md) {
+        this.setState({
+            markdownSrc: md
+        });
+    }
+
+    highlightCodeBlocks() {
+        if (this.state.markdownSrc.indexOf('```') === -1) {
+            return;
+        }
+
+        var els = document.querySelectorAll('pre code');
+        for (var i = 0; i < els.length; i++) {
+            hljs.highlightBlock(els[i]);
+        }
+    }
+
+    componentDidMount() {
+        this.highlightCodeBlocks();
+
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({
+            markdownSrc: props.content
+        });
+    }
+
+    componentDidUpdate() {
+        this.highlightCodeBlocks();
+    }
+
+    onControlsChange(mode) {
+        this.setState({htmlMode: mode});
+    }
+
+    writeClick() {
+        var data = {
+            content: this.state.markdownSrc,
+            email: "aoruqjfu@gmail.com",
+            category: {
+                categoryId: 1
+            },
+            title: "create Test blog"
+        }
+        PostsActionCreator.createPost(data);
+    }
+
+    render() {
+        return (
+            <Tabs defaultActiveKey={1}>
+                <Tab eventKey={1} title="write">
+                    <div className="editor-pane">
+                        <MarkdownControls
+                            onChange={this.onControlsChange.bind(this)}
+                            mode={this.state.htmlMode}
+                        />
+                        <Editor
+                            value={this.state.markdownSrc}
+                            onChange={this.onMarkdownChange.bind(this)}
+                        />
+                    </div>
+
+                </Tab>
+                <Tab eventKey={2} title="Preview changes">
+                    <div className="result-pane">
+                        <ReactMarkdown
+                            className="result"
+                            source={this.state.markdownSrc}
+                            skipHtml={this.state.htmlMode === 'skip'}
+                            escapeHtml={this.state.htmlMode === 'escape'}
+                        />
+                    </div>
+                </Tab>
+                <Button bsStyle="primary" onClick={this.writeClick.bind(this)}>
+                    Write
+                </Button>
+            </Tabs>
+
+        );
+    }
 }
+//'# Live demo\n\nChanges are automatically rendered as you type.\n\n* Follows the ',
+//    '[CommonMark](http://commonmark.org/) spec\n* Renders actual, "native" React DOM ',
+//    'elements\n* Allows you to escape or skip HTML (try toggling the checkboxes above)',
+//    '\n* If you escape or skip the HTML, no `dangerouslySetInnerHTML` is used! Yay!\n',
+//    '\n## HTML block below\n\n<blockquote>\n    This blockquote will change based ',
+//    'on the HTML settings above.\n</blockquote>\n\n## How about some code?\n',
+//    '```js\nvar React = require(\'react\');\nvar Markdown = require(\'react-markdown\');',
+//    '\n\nReact.render(\n    <ReactMarkdown source="# Your markdown here" />,\n    document.',
+//    'getElementById(\'content\')\n);\n```\n\nPretty neat, eh?\n\n', '## More info?\n\n',
+//    'Read usage information and more on [GitHub](//github.com/rexxars/react-markdown)\n\n',
+//    '---------------\n\n',
+//    'A component by [VaffelNinja](http://vaffel.ninja) / Espen Hovlandsdal'
+

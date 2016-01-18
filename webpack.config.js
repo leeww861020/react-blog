@@ -19,7 +19,12 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader!postcss-loader'
+            },
+            {
+                test: /\.json$/,
+                loader: 'json'
             }
+
 	    ]
     }
 };

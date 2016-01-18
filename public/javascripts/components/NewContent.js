@@ -7,27 +7,27 @@ import PostsActionCreator from '../actions/PostsActionCreator';
 import MarkDown from './MarkDown';
 
 
-export default class NewContent extends Component{
+export default class NewContent extends Component {
 
     constructor(props) {
         super(props);
         this._onChange = this._onChange.bind(this);
 //        this.state = this.getStateStore();
     }
-    
-    getStateStore(props){
-    	const { id } = props ? props.params : this.props.params;
-    	return { 
-    		post: PostsStore.getPost(id)
-    	}
+
+    getStateStore(props) {
+        const { id } = props ? props.params : this.props.params;
+        return {
+            post: PostsStore.getPost(id)
+        }
     }
-    
+
     componentWillMount() {
 //    	PostsStore.addChangeListener(this._onChange);
     }
 
     componentDidMount() {
-    	
+
     }
 
     componentWillUnmount() {
@@ -38,12 +38,15 @@ export default class NewContent extends Component{
 //    	var post = this.getStateStore();
 //    	this.setState(this.getStateStore());
     }
-    
+
     render() {
-		return (
-			<div className="col-md-8">
-				<MarkDown />
- 			</div>
+        return (
+            <div className="col-md-8">
+                <h1>inputbox</h1>
+                <hr>
+                </hr>
+                <MarkDown />
+            </div>
         );
     }
 }

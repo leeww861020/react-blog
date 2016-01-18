@@ -12,35 +12,59 @@ class LoginStore extends BaseStore {
     constructor() {
         super();
         this.subscribe(() => this._registerToActions.bind(this));
-        this.access_token;
+        this.token;
     }
 
     _registerToActions(payload) {
         let action = payload.action;
         switch (action.actionType) {
             case ActionConstants.RECEIVE_LOGIN:
-                this.access_token = action.token;
-                localStorage.setItem('token', this.access_token);
+                this.token = action.token;
+                setStorage('token', this.token);
+                break;
+            case ActionConstants.RECEIVE_LOGOUT:
+                removeItem('token');
+                break;
+            case ActionConstants.RECEIVE_LOGIN_ERROR:
                 break;
             default:
                 return true;
         }
-        this.emitChange();
 
+        this.emitChange();
         return true;
     }
 
-    getToken () {
-        return this.access_token;
+    getToken() {
+        return this.token;
     }
 
-    isLogin(){
+    getAccessToken() {
+        return getLocalToken().access_token;
+    }
+
+    isLogin() {
         return getLocalToken() != null;
     }
 }
 
-function getLocalToken(){
-    return localStorage.getItem("token");
+function getLocalToken() {
+    return getStorage("token");
+}
+
+function getStorage(key) {
+    let value = localStorage.getItem(key);
+    if (value) {
+        return JSON.parse(value);
+    }
+    return null;
+}
+
+function removeItem(key) {
+    localStorage.removeItem(key);
+}
+function setStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
 }
 
 export default new LoginStore();

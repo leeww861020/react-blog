@@ -1,145 +1,81 @@
-html,
-body,
-.full-height {
-  height: 100%;
+
+
+.editor-pane {
+    /*position: fixed;*/
+    top: 57px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+    height: 600px;
+    font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.5em;
 }
-body {
-  overflow-x: hidden;
-  padding-bottom: 180px;
-  background-color: #fbfbfb;
+
+.result-pane > div {
+    /*position: fixed;*/
+    top: 57px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+    padding: 10px;
+    padding-left: 20px;
+    color: #444;
+    font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.5em;
 }
-.demo-options {
-  margin-bottom: 10px;
+
+.editor textarea {
+    padding: 20px;
 }
-.opt__strict .not-strict {
-  opacity: 0.3;
+
+.editor-pane textarea {
+    min-height: 500px;
 }
-.checkbox {
-  margin-right: 10px;
+
+.markdown-controls {
+    position: relative;
+    z-index: 5;
+    text-align: right;
+    color: #fff;
+    float: right;
 }
-.source {
-  width: 100%;
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-  font-size: 13px;
-  padding: 2px;
+
+.markdown-controls form {
+    background-color: rgba(39, 40, 34, 0.5);
+    margin-right: 20px;
 }
-.result-html {
-  padding: 2px 10px;
-  overflow: auto;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+
+.markdown-controls legend {
+    border-bottom: 0;
+    color: #fff;
+    font-size: 1.25em;
+    margin: 0;
+    padding: 10px 0 0 0;
 }
-.result-html img {
-  max-width: 35%;
+
+.CodeMirror {
+    position: absolute;
+    top: 241px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: 600px;
+
+    font-size: 16px;
 }
-.result-src,
-.result-debug {
-  display: none;
-  background-color: #fff;
+
+pre {
+    border: 1px solid #ccc;
 }
-.result-src-content,
-.result-debug-content {
-  white-space: pre;
-}
-.result-as-html .result-html {
-  display: block;
-}
-.result-as-html .result-src,
-.result-as-html .result-debug {
-  display: none;
-}
-.result-as-src .result-src {
-  display: block;
-}
-.result-as-src .result-html,
-.result-as-src .result-debug {
-  display: none;
-}
-.result-as-debug .result-debug {
-  display: block;
-}
-.result-as-debug .result-html,
-.result-as-debug .result-src {
-  display: none;
-}
-.demo-control {
-  position: absolute;
-  right: 40px;
-  top: 0;
-  border-radius: 0 0 6px 6px;
-  font-size: 12px;
-  background-color: #666;
-  color: #fff !important;
-  opacity: 0.6;
-  -webkit-transition: opacity 0.5s ease-in-out;
-          transition: opacity 0.5s ease-in-out;
-}
-.demo-control:hover {
-  opacity: 1;
-}
-.demo-control a {
-  padding: 0 20px;
-  color: #fff !important;
-}
-.demo-control a:first-child {
-  padding-left: 30px;
-}
-.demo-control a:last-child {
-  padding-right: 30px;
-}
-.hljs {
-  background: none;
-  padding: 0;
-}
-.footnotes {
-  -moz-column-count: 2;
-  -webkit-column-count: 2;
-  column-count: 2;
-}
-.footnotes-list {
-  padding-left: 2em;
-}
-.gh-ribbon {
-  display: block;
-  position: absolute;
-  right: -60px;
-  top: 44px;
-  -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-          transform: rotate(45deg);
-  width: 230px;
-  z-index: 10000;
-  white-space: nowrap;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #686868;
-  box-shadow: 0 0 2px rgba(102,102,102,0.4);
-  padding: 1px 0;
-}
-.gh-ribbon a {
-  text-decoration: none !important;
-  border: 1px solid #ccc;
-  color: #fff;
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  outline: medium none;
-  padding: 4px 50px 2px;
-  text-align: center;
-}
-.form-inline .radio,
-.form-inline .checkbox {
-  display: inline-block;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-.form-inline .form-group {
-  display: inline-block;
-  margin-bottom: 0;
-  vertical-align: middle;
-}
-.form-inline .form-control {
-  display: inline-block;
-  vertical-align: middle;
-  width: auto;
+
+blockquote {
+    color: #666;
+    margin: 0;
+    padding-left: 3em;
+    border-left: 0.5em #eee solid;
 }
