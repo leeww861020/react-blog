@@ -23,12 +23,8 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var proxy = new httpProxy.createProxyServer({
-  target: {
-    host: 'localhost',
-    port: 8888
-  }
-});
+
+var proxy = new httpProxy.createProxyServer();
 
 app.post('/v1/oauth/token', function(req, res){
   req.headers["contentType"] = "application/x-www-form-urlencoded";
@@ -36,14 +32,33 @@ app.post('/v1/oauth/token', function(req, res){
   proxy.web(req, res);
 });
 
+var addresses = [
+  {
+    host: 'localhost',
+    port: 8080
+  },
+  {
+    host: 'localhost',
+    port: 8081
+  }
+];
+
 
 app.all('/v1/*', function(req, res){
   req.headers["contentType"] = "application/json;charset=utf-8";
-    //req.body = JSON.stringify(req.body)
-    //console.log(req.body);
-    //console.log(typeof(req.body));
-    //console.log(typeof(req.body) == "String");
-  proxy.web(req, res);
+  var target = { target: addresses.shift() };
+  proxy.web(req, res, target);
+  addresses.push(target.target);
+});
+
+proxy.on('error', function (err, req, res) {
+  if(err.code == 'ECONNREFUSED'){
+    var target = { target: addresses.shift() };
+    proxy.web(req, res, target);
+    addresses.push(target.target);
+  }else{
+    throw err;
+  }
 });
 
 
