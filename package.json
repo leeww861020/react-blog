@@ -33,7 +33,7 @@
     "react-markdown" : "^1.2.2",
     "react-textarea-autosize": "^3.1.0",
     "history": "^1.17.0",
-  "codemirror": "^5.3.0",
+    "codemirror": "^5.3.0",
     "react": "^0.14.6",
     "highlight.js" : "^9.0.0",
     "css-loader": "^0.16.0",
