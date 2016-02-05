@@ -7,7 +7,7 @@ module.exports = {
     debug: true,
     output: {
         path: __dirname,
-        filename: 'public/javascripts/bundle.js'
+        filename: '/home/runner/react-blog/public/javascripts/bundle.js'
     },
     module: {
     	loaders: [
