@@ -16,7 +16,7 @@ export default class Login extends Component {
         super(props);
         this._onChange = this._onChange.bind(this);
         this.state = {
-            login: LoginStore.isLogin()
+            login: LoginStore.isLogin
         };
     }
 
@@ -30,7 +30,7 @@ export default class Login extends Component {
 
     _onChange() {
         this.setState({
-            login: LoginStore.isLogin()
+            login: LoginStore.isLogin
         });
     }
 

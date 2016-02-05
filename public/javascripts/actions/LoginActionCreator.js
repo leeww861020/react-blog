@@ -5,7 +5,7 @@
 
 import Dispatcher from '../core/Dispatcher';
 import ActionConstants from '../constants/ActionConstants';
-import { Promise } from'es6-promise'; // jshint ignore:line
+import { Promise } from 'es6-promise'; // jshint ignore:line
 import Api from '../services/Api';
 
 export default {

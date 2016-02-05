@@ -68,7 +68,7 @@ class Category extends Component {
 
     _onChange() {
         this.setState({
-            categories: CategoryStore.getCategories()
+            categories: CategoryStore.categories
         });
     }
 

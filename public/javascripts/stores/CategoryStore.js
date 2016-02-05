@@ -25,7 +25,7 @@ class CategoryStore extends BaseStore {
         return true;
     }
 
-    getCategories() {
+    get Categories() {
         return this.categories;
     }
 

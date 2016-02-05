@@ -38,7 +38,7 @@ export default class Contents extends Component {
 
     _onChange() {
         this.setState({
-            posts: PostsStore.getPosts()
+            posts: PostsStore.posts
         });
     }
 

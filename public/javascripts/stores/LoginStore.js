@@ -35,15 +35,15 @@ class LoginStore extends BaseStore {
         return true;
     }
 
-    getToken() {
+    get getToken() {
         return this.token;
     }
 
-    getAccessToken() {
+    get AccessToken() {
         return getLocalToken().access_token;
     }
 
-    isLogin() {
+    get isLogin() {
         return getLocalToken() != null;
     }
 }

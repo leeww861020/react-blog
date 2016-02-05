@@ -30,7 +30,6 @@ export default class LoginButton extends Component {
         //    grant_type : "password",
         //    scope : "read write"
         //};
-        console.log(data);
         LoginActionCreator.Login("wonwooapp", "XX0000001", data);
     }
 
@@ -51,7 +50,7 @@ export default class LoginButton extends Component {
     }
 
     _onChange() {
-        if (LoginStore.isLogin()) {
+        if (LoginStore.isLogin) {
             this.hideModal();
         } else {
             alert("아이디와 패스워드가 일치 하지 않습니다.");

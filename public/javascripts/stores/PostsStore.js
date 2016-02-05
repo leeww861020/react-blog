@@ -17,7 +17,7 @@ class PostsStore extends BaseStore {
         let action = payload.action;
         switch (action.actionType) {
             case ActionConstants.RECEIVE_POSTS:
-                this.posts = action.posts.content;
+                  this.posts = action.posts.content;
                 break;
             case ActionConstants.RECEIVE_POST:
                 this.post = action.post;
@@ -31,11 +31,11 @@ class PostsStore extends BaseStore {
         return true;
     }
 
-    getPosts() {
+    get Posts() {
         return this.posts;
     }
 
-    getPost() {
+    get Post() {
         return this.post;
     }
 
