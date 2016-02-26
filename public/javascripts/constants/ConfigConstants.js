@@ -1,3 +1,3 @@
 export default {
-    API_URL: "https://127.0.0.1/v1/"
+    API_URL: "https://reat-blog.herokuapp.com/v1/"
 };
