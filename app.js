@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var https = require('https');
 
 var index = require('./routes/index');
 //var api = require('./routes/api');
@@ -24,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-var proxy = new httpProxy.createProxyServer()
+var proxy = new httpProxy.createProxyServer();
 
 app.post('/v1/oauth/token', function(req, res){
   req.headers["contentType"] = "application/x-www-form-urlencoded";
@@ -34,20 +35,27 @@ app.post('/v1/oauth/token', function(req, res){
 
 var addresses = [
   {
-    host: 'https://spring-boot-simple.herokuapp.com',
-    //port: 443
-  },
-  {
-    host: 'https://spring-boot-simple.herokuapp.com',
-    //port: 443
+    host: 'spring-boot-simple.herokuapp.com',
+    //agent  : https.globalAgent,
+    //port: 80
   }
+  //{
+  //  host: 'localhost',
+  //  port: 8081
+  //}
 ];
 
 
 app.all('/v1/*', function(req, res){
   req.headers["contentType"] = "application/json;charset=utf-8";
   var target = { target: addresses.shift() };
-  proxy.web(req, res, target);
+  req.headers.host = 'spring-boot-simple.herokuapp.com';
+  proxy.proxyRequest(req, res, target);
+  //proxy.proxyRequest(req, res, {
+  //  port: 80,
+  //  host: 'spring-boot-simple.herokuapp.com'
+  //});
+
   addresses.push(target.target);
 });
 
