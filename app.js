@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-var proxy = new httpProxy.createProxyServer();
+var proxy = new httpProxy.createProxyServer()
 
 app.post('/v1/oauth/token', function(req, res){
   req.headers["contentType"] = "application/x-www-form-urlencoded";
@@ -35,12 +35,12 @@ app.post('/v1/oauth/token', function(req, res){
 var addresses = [
   {
     host: 'https://spring-boot-simple.herokuapp.com',
-    port: 80
+    //port: 443
+  },
+  {
+    host: 'https://spring-boot-simple.herokuapp.com',
+    //port: 443
   }
-  //{
-  //  host: 'localhost',
-  //  port: 8081
-  //}
 ];
 
 
