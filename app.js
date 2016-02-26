@@ -37,6 +37,7 @@ var addresses = [
   {
     host: 'https://spring-boot-simple.herokuapp.com',
     agent  : https.globalAgent,
+    changeOrigin : true
     //port: 80
   }
   //{
