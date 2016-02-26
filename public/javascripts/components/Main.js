@@ -12,7 +12,6 @@ import '../util/socketio';
 /*
  *  Base App Component for Redirect Handling
  */
-document.domain = 'herokuapp.com';
 export default class Main extends Component {
 
     render() {

@@ -34,13 +34,13 @@ app.post('/v1/oauth/token', function(req, res){
 
 var addresses = [
   {
-    host: 'localhost',
-    port: 8080
-  },
-  {
-    host: 'localhost',
-    port: 8081
+    host: 'https://spring-boot-simple.herokuapp.com',
+    port: 80
   }
+  //{
+  //  host: 'localhost',
+  //  port: 8081
+  //}
 ];
 
 
