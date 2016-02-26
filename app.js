@@ -35,8 +35,8 @@ app.post('/v1/oauth/token', function(req, res){
 
 var addresses = [
   {
-    host: 'spring-boot-simple.herokuapp.com',
-    //agent  : https.globalAgent,
+    host: 'https://spring-boot-simple.herokuapp.com',
+    agent  : https.globalAgent,
     //port: 80
   }
   //{
@@ -49,7 +49,7 @@ var addresses = [
 app.all('/v1/*', function(req, res){
   req.headers["contentType"] = "application/json;charset=utf-8";
   var target = { target: addresses.shift() };
-  req.headers.host = 'spring-boot-simple.herokuapp.com';
+  req.headers.host = 'https://spring-boot-simple.herokuapp.com';
   proxy.proxyRequest(req, res, target);
   //proxy.proxyRequest(req, res, {
   //  port: 80,
